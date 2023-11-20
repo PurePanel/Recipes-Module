@@ -1,6 +1,7 @@
 <?php namespace Visiosoft\RecipesModule\Http\Controller\Admin;
 
 use Visiosoft\RecipesModule\Recipe\Form\RecipeFormBuilder;
+use Visiosoft\RecipesModule\Recipe\RunForm\RunRecipeFormBuilder;
 use Visiosoft\RecipesModule\Recipe\Table\RecipeTableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 
@@ -40,5 +41,14 @@ class RecipeController extends AdminController
     public function edit(RecipeFormBuilder $form, $id)
     {
         return $form->render($id);
+    }
+
+    /**
+     * @param RunRecipeFormBuilder $builder
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function run(RunRecipeFormBuilder $builder)
+    {
+        return $builder->render();
     }
 }

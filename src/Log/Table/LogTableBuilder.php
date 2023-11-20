@@ -1,8 +1,8 @@
-<?php namespace Visiosoft\RecipesModule\Recipe\Table;
+<?php namespace Visiosoft\RecipesModule\Log\Table;
 
 use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
 
-class RecipeTableBuilder extends TableBuilder
+class LogTableBuilder extends TableBuilder
 {
 
     /**
@@ -17,15 +17,7 @@ class RecipeTableBuilder extends TableBuilder
      *
      * @var array|string
      */
-    protected $filters = [
-        'search' => [
-            'filter' => 'search',
-            'fields' => [
-                'name',
-                'recipe_key',
-            ],
-        ],
-    ];
+    protected $filters = [];
 
     /**
      * The table columns.
@@ -33,8 +25,9 @@ class RecipeTableBuilder extends TableBuilder
      * @var array|string
      */
     protected $columns = [
-        'name',
-        'recipe_key'
+        'site',
+        'recipe',
+        'created_at'
     ];
 
     /**
@@ -43,7 +36,7 @@ class RecipeTableBuilder extends TableBuilder
      * @var array|string
      */
     protected $buttons = [
-        'edit'
+        'view'
     ];
 
     /**

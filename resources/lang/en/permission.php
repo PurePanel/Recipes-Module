@@ -9,4 +9,12 @@ return [
             'delete' => 'Can delete recipe?',
         ],
     ],
+    'logs' => [
+        'name'   => 'Logs',
+        'option' => [
+            'read'   => 'Can read logs?',
+            'write'  => 'Can create/edit logs?',
+            'delete' => 'Can delete logs?',
+        ],
+    ],
 ];

@@ -1,6 +1,10 @@
 <?php namespace Visiosoft\RecipesModule;
 
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Visiosoft\RecipesModule\Log\Contract\LogRepositoryInterface;
+use Visiosoft\RecipesModule\Log\LogRepository;
+use Anomaly\Streams\Platform\Model\Recipes\RecipesLogsEntryModel;
+use Visiosoft\RecipesModule\Log\LogModel;
 use Visiosoft\RecipesModule\Recipe\Contract\RecipeRepositoryInterface;
 use Visiosoft\RecipesModule\Recipe\RecipeRepository;
 use Anomaly\Streams\Platform\Model\Recipes\RecipesRecipeEntryModel;
@@ -46,7 +50,11 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
     protected $routes = [
         'admin/recipes'           => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@index',
         'admin/recipes/create'    => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@create',
+        'admin/recipes/run'    => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@run',
         'admin/recipes/edit/{id}' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@edit',
+        'admin/recipes/logs'           => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@index',
+        'admin/recipes/logs/create'    => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@create',
+        'admin/recipes/logs/edit/{id}' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@edit',
     ];
 
     /**
@@ -102,6 +110,7 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
      * @type array|null
      */
     protected $bindings = [
+        RecipesLogsEntryModel::class => LogModel::class,
         RecipesRecipeEntryModel::class => RecipeModel::class,
     ];
 
@@ -111,6 +120,7 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
      * @type array|null
      */
     protected $singletons = [
+        LogRepositoryInterface::class => LogRepository::class,
         RecipeRepositoryInterface::class => RecipeRepository::class,
     ];
 
