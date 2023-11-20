@@ -1,0 +1,17 @@
+{
+    "name": "visiosoft/recipes-module",
+    "description": "This module allows you to execute your list of commands like in Laravel Forge.",
+    "type": "streams-addon",
+    "authors": [
+        {
+            "name": "Vedat Akdogan",
+            "email": "vedatakdogan@live.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Visiosoft\\RecipesModule\\": "src/"
+        }
+    }
+}
