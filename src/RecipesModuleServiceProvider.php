@@ -40,7 +40,12 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
      *
      * @type array|null
      */
-    protected $api = [];
+    protected $api = [
+        'api/recipe/run' => [
+            'verb' => 'POST',
+            'uses' => 'Visiosoft\RecipesModule\Http\Controller\ApiController@run',
+        ],
+    ];
 
     /**
      * The addon routes.
@@ -48,12 +53,12 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
      * @type array|null
      */
     protected $routes = [
-        'admin/recipes'           => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@index',
-        'admin/recipes/create'    => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@create',
-        'admin/recipes/run'    => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@run',
+        'admin/recipes' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@index',
+        'admin/recipes/create' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@create',
+        'admin/recipes/run' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@run',
         'admin/recipes/edit/{id}' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@edit',
-        'admin/recipes/logs'           => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@index',
-        'admin/recipes/logs/create'    => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@create',
+        'admin/recipes/logs' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@index',
+        'admin/recipes/logs/create' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@create',
         'admin/recipes/logs/edit/{id}' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@edit',
     ];
 
@@ -168,12 +173,12 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
     public function boot()
     {
 
-        \config()->set('anomaly.field_type.editor::editor.modes.shell',[
+        \config()->set('anomaly.field_type.editor::editor.modes.shell', [
             'extension' => 'shell',
-            'name'      => 'Shell',
-            'loader'    => 'shell',
-            'styles'    => [],
-            'scripts'   => [
+            'name' => 'Shell',
+            'loader' => 'shell',
+            'styles' => [],
+            'scripts' => [
                 'anomaly.field_type.editor::js/codemirror/mode/shell/shell.js',
             ],
         ]);
