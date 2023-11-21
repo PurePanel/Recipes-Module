@@ -2,17 +2,11 @@
 
 use Visiosoft\RecipesModule\Recipe\Contract\RecipeInterface;
 use Anomaly\Streams\Platform\Model\Recipes\RecipesRecipeEntryModel;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RecipeModel extends RecipesRecipeEntryModel implements RecipeInterface
 {
-    use HasFactory;
-
-    /**
-     * @return RecipeFactory
-     */
-    protected static function newFactory()
+    public function getCommands()
     {
-        return RecipeFactory::new();
+        return $this->commands;
     }
 }

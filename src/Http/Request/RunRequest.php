@@ -1,6 +1,5 @@
 <?php namespace Visiosoft\RecipesModule\Http\Request;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RunRequest extends FormRequest
@@ -11,15 +10,6 @@ class RunRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-    }
-
-    /**
-     * @param Validator $validator
-     * @return Validator
-     */
-    protected function failedValidation(Validator $validator): object
-    {
-        return $this->validator = $validator;
     }
 
     public function rules(): array

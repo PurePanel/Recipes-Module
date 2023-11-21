@@ -1,11 +1,11 @@
 <?php namespace Visiosoft\RecipesModule\Http\Controller;
 
-use Anomaly\Streams\Platform\Http\Controller\PublicController;
+use Anomaly\Streams\Platform\Http\Controller\ResourceController;
 use Visiosoft\RecipesModule\Http\Request\RunRequest;
 use Visiosoft\RecipesModule\Recipe\Contract\RecipeRepositoryInterface;
 use Visiosoft\SiteModule\Site\Contract\SiteRepositoryInterface;
 
-class ApiController extends PublicController
+class ApiController extends ResourceController
 {
     /**
      * @var RecipeRepositoryInterface

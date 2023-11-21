@@ -4,5 +4,5 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
 interface RecipeRepositoryInterface extends EntryRepositoryInterface
 {
-
+    public function findByKey($key);
 }

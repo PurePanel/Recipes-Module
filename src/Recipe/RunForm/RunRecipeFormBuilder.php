@@ -18,6 +18,8 @@ class RunRecipeFormBuilder extends FormBuilder
             'type' => 'anomaly.field_type.relationship',
             'required' => true,
             'config' => [
+                'title_name' => 'username',
+                'key_name' => 'site_id',
                 'related' => SiteModel::class,
                 'mode' => 'search'
             ],
@@ -27,8 +29,8 @@ class RunRecipeFormBuilder extends FormBuilder
             'type' => 'anomaly.field_type.relationship',
             'required' => true,
             'config' => [
+                'key_name' => 'recipe_key',
                 'related' => RecipeModel::class,
-                'mode' => 'search'
             ],
         ],
     ];

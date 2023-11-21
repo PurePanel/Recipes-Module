@@ -22,4 +22,9 @@ class RecipeRepository extends EntryRepository implements RecipeRepositoryInterf
     {
         $this->model = $model;
     }
+
+    public function findByKey($key)
+    {
+        return $this->findBy('recipe_key', $key);
+    }
 }

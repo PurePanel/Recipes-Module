@@ -41,10 +41,7 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
      * @type array|null
      */
     protected $api = [
-        'api/recipe/run' => [
-            'verb' => 'POST',
-            'uses' => 'Visiosoft\RecipesModule\Http\Controller\ApiController@run',
-        ],
+
     ];
 
     /**
@@ -60,6 +57,10 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
         'admin/recipes/logs' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@index',
         'admin/recipes/logs/create' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@create',
         'admin/recipes/logs/edit/{id}' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@edit',
+        'api/recipe/run' => [
+            'verb' => 'POST',
+            'uses' => 'Visiosoft\RecipesModule\Http\Controller\ApiController@run',
+        ],
     ];
 
     /**
