@@ -31,7 +31,9 @@ class LogFormBuilder extends FormBuilder
      *
      * @var array|string
      */
-    protected $actions = [];
+    protected $actions = [
+        'save_exit'
+    ];
 
     /**
      * The form buttons.

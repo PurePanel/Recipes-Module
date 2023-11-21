@@ -1,5 +1,6 @@
 <?php namespace Visiosoft\RecipesModule\Recipe\RunForm;
 
+use Visiosoft\RecipesModule\Log\Command\CreateLog;
 use Visiosoft\RecipesModule\Recipe\Jobs\RunRecipe;
 use Visiosoft\RecipesModule\Recipe\Contract\RecipeRepositoryInterface;
 use Visiosoft\SiteModule\Site\Contract\SiteRepositoryInterface;
@@ -35,7 +36,5 @@ class RunRecipeFormHandler
          * Run Recipe
          */
         dispatch_sync(new RunRecipe($site, $recipe));
-
-        // Todo: Create dispatch logRecipe and use here
     }
 }

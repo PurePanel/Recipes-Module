@@ -20,23 +20,12 @@ class LogTableBuilder extends TableBuilder
     protected $filters = [];
 
     /**
-     * The table columns.
-     *
-     * @var array|string
-     */
-    protected $columns = [
-        'site',
-        'recipe',
-        'created_at'
-    ];
-
-    /**
      * The table buttons.
      *
      * @var array|string
      */
     protected $buttons = [
-        'view'
+        'edit'
     ];
 
     /**

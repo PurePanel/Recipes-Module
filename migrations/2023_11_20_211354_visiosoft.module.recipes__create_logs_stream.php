@@ -57,5 +57,7 @@ class VisiosoftModuleRecipesCreateLogsStream extends Migration
         'site' => [
             'required' => true,
         ],
+        'success',
+        'response'
     ];
 }

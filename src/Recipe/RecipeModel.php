@@ -5,7 +5,7 @@ use Anomaly\Streams\Platform\Model\Recipes\RecipesRecipeEntryModel;
 
 class RecipeModel extends RecipesRecipeEntryModel implements RecipeInterface
 {
-    public function getCommands()
+    public function getCommands(): string
     {
         return $this->commands;
     }

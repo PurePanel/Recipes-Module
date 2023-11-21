@@ -38,10 +38,10 @@ class VisiosoftModuleRecipesCreateRecipeStream extends Migration
             ],
         ],
         "commands" => [
-            "type"   => "anomaly.field_type.editor",
+            "type" => "anomaly.field_type.editor",
             "config" => [
-                "mode"          => "shell",
-                "height"        => 500,
+                "mode" => "shell",
+                "height" => 500,
             ]
         ],
     ];
