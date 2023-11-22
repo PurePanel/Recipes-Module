@@ -1,6 +1,8 @@
 <?php namespace Visiosoft\RecipesModule;
 
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Visiosoft\ApiExtension\Http\Controllers\AuthController;
+use Visiosoft\RecipesModule\Http\Controller\ApiController;
 use Visiosoft\RecipesModule\Log\Contract\LogRepositoryInterface;
 use Visiosoft\RecipesModule\Log\LogRepository;
 use Anomaly\Streams\Platform\Model\Recipes\RecipesLogsEntryModel;
@@ -40,9 +42,7 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
      *
      * @type array|null
      */
-    protected $api = [
-
-    ];
+    protected $api = [];
 
     /**
      * The addon routes.
@@ -57,10 +57,6 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
         'admin/recipes/logs' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@index',
         'admin/recipes/logs/create' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@create',
         'admin/recipes/logs/edit/{id}' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@edit',
-        'api/recipe/run' => [
-            'verb' => 'POST',
-            'uses' => 'Visiosoft\RecipesModule\Http\Controller\ApiController@run',
-        ],
     ];
 
     /**
@@ -173,7 +169,6 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
      */
     public function boot()
     {
-
         \config()->set('anomaly.field_type.editor::editor.modes.shell', [
             'extension' => 'shell',
             'name' => 'Shell',
@@ -188,16 +183,16 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
         // Use method injection or commands to bring in services.
     }
 
-    /**
-     * Map additional addon routes.
-     *
-     * @param Router $router
-     */
     public function map(Router $router)
     {
-        // Register dynamic routes here for example.
-        // Use method injection or commands to bring in services.
+        $this->mapRouters($router);
     }
 
-
+    public function mapRouters(Router $router)
+    {
+        $router->group(['middleware' => ['apikey']], function () use ($router) {
+            $router->get('api/recipes', [ApiController::class, 'list']);
+            $router->post('api/recipe/run', [ApiController::class, 'run']);
+        });
+    }
 }
