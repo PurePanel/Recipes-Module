@@ -33,7 +33,7 @@ class ApiController extends ResourceController
      * Return recipes list
      * @return object|\Illuminate\Http\JsonResponse
      */
-    public function list(): object
+    public function index(): object
     {
         try {
             $recipes = $this->recipe->all()->pluck('recipe_key','id')->all();

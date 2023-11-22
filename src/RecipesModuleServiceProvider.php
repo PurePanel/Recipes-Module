@@ -190,9 +190,9 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
 
     public function mapRouters(Router $router)
     {
-        $router->group(['middleware' => ['apikey']], function () use ($router) {
-            $router->get('api/recipes', [ApiController::class, 'list']);
-            $router->post('api/recipe/run', [ApiController::class, 'run']);
+        $router->group(['prefix' => 'api/recipes','middleware' => ['apikey']], function () use ($router) {
+            $router->get('/', [ApiController::class, 'index']);
+            $router->post('/run', [ApiController::class, 'run']);
         });
     }
 }
