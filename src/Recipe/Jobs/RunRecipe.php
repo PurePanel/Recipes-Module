@@ -13,10 +13,9 @@ use Visiosoft\SiteModule\Helpers\Formatters;
 use Visiosoft\SiteModule\Helpers\Log;
 use Visiosoft\SiteModule\Site\Contract\SiteInterface;
 
-//class RunRecipe implements ShouldQueue
-class RunRecipe
+class RunRecipe implements ShouldQueue
 {
-//    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected SiteInterface $site;
     protected RecipeInterface $recipe;
