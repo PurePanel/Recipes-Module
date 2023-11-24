@@ -15,7 +15,7 @@ class RunRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'siteId' => 'required|integer|exists:site_site,id',
+            'siteId' => 'required|string|exists:site_site,site_id',
             'recipeKey' => 'required|string|exists:recipes_recipe,recipe_key',
         ];
     }
