@@ -59,7 +59,7 @@ class ApiController extends ResourceController
     {
         try {
             $request->validated();
-            $site = $this->site->find($request->get('siteId'));
+            $site = $this->site->findBy('site_id',$request->get('siteId'));
             $recipe = $this->recipe->findBy('recipe_key',$request->get('recipeKey'));
 
             dispatch_sync(new RunRecipe($site, $recipe));
