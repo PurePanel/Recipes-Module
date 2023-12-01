@@ -29,35 +29,32 @@ class RunRecipe implements ShouldQueue
 
     public function handle()
     {
-        try {
-            $replaces = [
-                'site_full_path' => "/home/" . $this->site->getUsername() . "/web",
-            ];
+        $replaces = [
+            'site_full_path' => "/home/" . $this->site->getUsername() . "/web",
+            'site_username' => $this->site->getUsername(),
+            'site_db_password' => $this->site->getDatabasePassword(),
+        ];
 
-            $server = $this->site->server;
-            $serverPassword = $server->getPassword();
-            $commands = preg_split('/\r\n/', trim($this->recipe->getCommands()));
+        $server = $this->site->server;
+        $serverPassword = $server->getPassword();
+        $commands = preg_split('/\r\n/', trim($this->recipe->getCommands()));
 
-            $ssh = new SSH2($server->getIp(), 22);
-            $ssh->login('pure', $serverPassword);
-            $ssh->setTimeout(360);
+        $ssh = new SSH2($server->getIp(), 22);
+        $ssh->login('pure', $serverPassword);
+        $ssh->setTimeout(360);
 
-            $output = array();
-            foreach ($commands as $command) {
-                $command = (new Formatters)->strReplace($command, $replaces, '{', '}');
-                $command = str_replace('sudo', 'echo ' . $serverPassword . " | sudo -S", $command);
-                $output[] = $ssh->exec($command);
-            }
-
-            $ssh->exec('exit');
-            /**
-             * Save Output log
-             */
-            $log = new CreateLog($this->recipe, $this->site, implode('\r\n', $output));
-            $log->save();
-
-        } catch (\Exception $exception) {
-            (new Log())->createLog('run_recipe', $exception);
+        $output = array();
+        foreach ($commands as $command) {
+            $command = (new Formatters)->strReplace($command, $replaces, '{', '}');
+            $command = str_replace('sudo', 'echo ' . $serverPassword . " | sudo -S", $command);
+            $output[] = $ssh->exec($command);
         }
+
+        $ssh->exec('exit');
+        /**
+         * Save Output log
+         */
+        $log = new CreateLog($this->recipe, $this->site, implode('\r\n', $output));
+        $log->save();
     }
 }
