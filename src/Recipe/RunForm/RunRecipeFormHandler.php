@@ -1,6 +1,7 @@
 <?php namespace Visiosoft\RecipesModule\Recipe\RunForm;
 
-use Visiosoft\RecipesModule\Log\Command\CreateLog;
+use Carbon\Carbon;
+use Visiosoft\SiteModule\Helpers\Log;
 use Visiosoft\RecipesModule\Recipe\Jobs\RunRecipe;
 use Visiosoft\RecipesModule\Recipe\Contract\RecipeRepositoryInterface;
 use Visiosoft\SiteModule\Site\Contract\SiteRepositoryInterface;
@@ -35,6 +36,10 @@ class RunRecipeFormHandler
         /**
          * Run Recipe
          */
-        dispatch_sync(new RunRecipe($site, $recipe));
+        try {
+            RunRecipe::dispatch($site, $recipe)->delay(Carbon::now()->addSeconds(3));
+        } catch (\Exception $e) {
+            (new Log())->createLog('error_run_recipe', $e);
+        }
     }
 }
