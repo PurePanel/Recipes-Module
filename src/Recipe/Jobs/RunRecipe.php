@@ -15,6 +15,8 @@ use Visiosoft\SiteModule\Site\Contract\SiteInterface;
 
 class RunRecipe implements ShouldQueue
 {
+    public $timeout = 0;
+
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected SiteInterface $site;
@@ -41,7 +43,7 @@ class RunRecipe implements ShouldQueue
 
         $ssh = new SSH2($server->getIp(), 22);
         $ssh->login('pure', $serverPassword);
-        $ssh->setTimeout(360);
+        $ssh->setTimeout(36000);
 
         $output = array();
         foreach ($commands as $command) {

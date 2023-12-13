@@ -1,6 +1,7 @@
 <?php namespace Visiosoft\RecipesModule\Http\Controller;
 
 use Anomaly\Streams\Platform\Http\Controller\ResourceController;
+use Carbon\Carbon;
 use Visiosoft\RecipesModule\Http\Request\RunRequest;
 use Visiosoft\RecipesModule\Recipe\Contract\RecipeRepositoryInterface;
 use Visiosoft\RecipesModule\Recipe\Jobs\RunRecipe;
@@ -62,7 +63,7 @@ class ApiController extends ResourceController
             $site = $this->site->findBy('site_id',$request->get('siteId'));
             $recipe = $this->recipe->findBy('recipe_key',$request->get('recipeKey'));
 
-            dispatch_sync(new RunRecipe($site, $recipe));
+            RunRecipe::dispatch($site, $recipe)->delay(Carbon::now()->addSeconds(10));
 
             return response()->json([
                 'success' => true,
