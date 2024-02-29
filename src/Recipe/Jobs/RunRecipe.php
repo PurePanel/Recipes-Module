@@ -10,7 +10,6 @@ use Visiosoft\RecipesModule\Log\Command\CreateLog;
 use Visiosoft\RecipesModule\Recipe\Contract\RecipeInterface;
 use Visiosoft\ServerModule\Server\Contract\ServerInterface;
 use Visiosoft\SiteModule\Helpers\Formatters;
-use Visiosoft\SiteModule\Helpers\Log;
 use Visiosoft\SiteModule\Site\Contract\SiteInterface;
 
 class RunRecipe implements ShouldQueue
@@ -22,20 +21,22 @@ class RunRecipe implements ShouldQueue
     protected SiteInterface $site;
     protected RecipeInterface $recipe;
     protected ServerInterface $server;
+    protected array $dynamicParameters;
 
-    public function __construct(SiteInterface $site, RecipeInterface $recipe)
+    public function __construct(SiteInterface $site, RecipeInterface $recipe, array $dynamicParameters = [])
     {
         $this->site = $site;
         $this->recipe = $recipe;
+        $this->dynamicParameters = $dynamicParameters;
     }
 
     public function handle()
     {
-        $replaces = [
+        $replaces = array_merge([
             'site_full_path' => "/home/" . $this->site->getUsername() . "/web",
             'site_username' => $this->site->getUsername(),
             'site_db_password' => $this->site->getDatabasePassword(),
-        ];
+        ], $this->dynamicParameters);
 
         $server = $this->site->server;
         $serverPassword = $server->getPassword();

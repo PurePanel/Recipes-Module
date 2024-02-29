@@ -37,7 +37,7 @@ class ApiController extends ResourceController
     public function index(): object
     {
         try {
-            $recipes = $this->recipe->all()->pluck('recipe_key','id')->all();
+            $recipes = $this->recipe->all()->pluck('recipe_key', 'id')->all();
 
             return response()->json([
                 'success' => true,
@@ -60,10 +60,14 @@ class ApiController extends ResourceController
     {
         try {
             $request->validated();
-            $site = $this->site->findBy('site_id',$request->get('siteId'));
-            $recipe = $this->recipe->findBy('recipe_key',$request->get('recipeKey'));
+            $site = $this->site->findBy('site_id', $request->get('siteId'));
+            $recipe = $this->recipe->findBy('recipe_key', $request->get('recipeKey'));
 
-            RunRecipe::dispatch($site, $recipe)->delay(Carbon::now()->addSeconds(10));
+            $dynamicParameters = array_filter($this->request->all(), function ($k) {
+                return !in_array($k, ['siteId', 'recipeKey']);
+            }, ARRAY_FILTER_USE_KEY);
+
+            RunRecipe::dispatch($site, $recipe, $dynamicParameters)->delay(Carbon::now()->addSeconds(10));
 
             return response()->json([
                 'success' => true,
