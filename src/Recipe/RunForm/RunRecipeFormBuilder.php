@@ -7,33 +7,9 @@ use Visiosoft\SiteModule\Site\SiteModel;
 class RunRecipeFormBuilder extends FormBuilder
 {
 
-    /**
-     * The form fields.
-     *
-     * @var array|string
-     */
-    protected $fields = [
-        'site' => [
-            'label' => 'visiosoft.module.recipes::field.select_site.name',
-            'type' => 'anomaly.field_type.relationship',
-            'required' => true,
-            'config' => [
-                'title_name' => 'username',
-                'key_name' => 'site_id',
-                'related' => SiteModel::class,
-                'mode' => 'search'
-            ],
-        ],
-        'recipe' => [
-            'label' => 'visiosoft.module.recipes::field.select_recipe.name',
-            'type' => 'anomaly.field_type.relationship',
-            'required' => true,
-            'config' => [
-                'key_name' => 'recipe_key',
-                'related' => RecipeModel::class,
-            ],
-        ],
-    ];
+    protected $model = RecipeModel::class;
+
+    public $dynamicParameters = [];
 
     /**
      * Additional validation rules.
@@ -91,5 +67,15 @@ class RunRecipeFormBuilder extends FormBuilder
      * @var array
      */
     protected $assets = [];
+
+    public function addDynamicParameter($parameter)
+    {
+        in_array($parameter, $this->dynamicParameters) ?: array_push($this->dynamicParameters, $parameter);
+    }
+
+    public function getDynamicParameters()
+    {
+        return $this->dynamicParameters;
+    }
 
 }

@@ -47,8 +47,8 @@ class RecipeController extends AdminController
      * @param RunRecipeFormBuilder $builder
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function run(RunRecipeFormBuilder $builder)
+    public function run(RunRecipeFormBuilder $builder, $recipeId)
     {
-        return $builder->render();
+        return $builder->render($recipeId);
     }
 }

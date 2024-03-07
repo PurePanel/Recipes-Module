@@ -29,11 +29,6 @@ class RecipesModule extends Module
         'recipe' => [
             'buttons' => [
                 'new_recipe',
-                'run' => [
-                    'href' => '/admin/recipes/run',
-                    'type' => 'info',
-                    'icon' => 'fa fa-play'
-                ],
             ],
         ],
         'logs'

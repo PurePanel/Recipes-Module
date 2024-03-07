@@ -43,7 +43,12 @@ class RecipeTableBuilder extends TableBuilder
      * @var array|string
      */
     protected $buttons = [
-        'edit'
+        'edit',
+        'run' => [
+            'href' => '/admin/recipes/run/{entry.id}',
+            'type' => 'info',
+            'icon' => 'fa fa-play'
+        ],
     ];
 
     /**
