@@ -31,7 +31,7 @@ class RunRecipeFormHandler
          * Set Variables before Run Dispatch
          */
         $site = $site->getSiteBySiteId($builder->getPostValue('site'));
-        $recipe = $recipe->findByKey($builder->getPostValue('recipe'));
+        $recipe = $recipe->find($builder->getEntry());
 
         $dynamicValues = array();
 
