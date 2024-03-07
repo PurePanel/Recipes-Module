@@ -35,9 +35,8 @@ class RunRecipeFormFields
 
         foreach ($dynamicParameters as $parameter) {
             if (!in_array($parameter, $siteParameters)) {
-                $fieldSlug = Str::slug($parameter, '_');
-                $builder->addDynamicParameter($fieldSlug);
-                $fields[$fieldSlug] = [
+                $builder->addDynamicParameter($parameter);
+                $fields[$parameter] = [
                     'type' => 'anomaly.field_type.text',
                     'label' => $parameter,
                     'required' => true,
