@@ -31,13 +31,19 @@ class RunRecipeFormHandler
          * Set Variables before Run Dispatch
          */
         $site = $site->getSiteBySiteId($builder->getPostValue('site'));
-        $recipe = $recipe->findByKey($builder->getPostValue('recipe'));
+        $recipe = $recipe->find($builder->getEntry());
+
+        $dynamicValues = array();
+
+        foreach ($builder->dynamicParameters as $parameter) {
+            $dynamicValues[$parameter] = $builder->getPostValue($parameter);
+        }
 
         /**
          * Run Recipe
          */
         try {
-            RunRecipe::dispatch($site, $recipe)->delay(Carbon::now()->addSeconds(3));
+            RunRecipe::dispatch($site, $recipe, $dynamicValues)->delay(Carbon::now()->addSeconds(3));
         } catch (\Exception $e) {
             (new Log())->createLog('error_run_recipe', $e);
         }

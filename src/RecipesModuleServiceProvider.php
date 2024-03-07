@@ -52,7 +52,7 @@ class RecipesModuleServiceProvider extends AddonServiceProvider
     protected $routes = [
         'admin/recipes' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@index',
         'admin/recipes/create' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@create',
-        'admin/recipes/run' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@run',
+        'admin/recipes/run/{recipeId}' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@run',
         'admin/recipes/edit/{id}' => 'Visiosoft\RecipesModule\Http\Controller\Admin\RecipeController@edit',
         'admin/recipes/logs' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@index',
         'admin/recipes/logs/create' => 'Visiosoft\RecipesModule\Http\Controller\Admin\LogsController@create',
