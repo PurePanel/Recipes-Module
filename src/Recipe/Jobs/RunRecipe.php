@@ -35,6 +35,7 @@ class RunRecipe implements ShouldQueue
         $replaces = array_merge([
             'site_full_path' => "/home/" . $this->site->getUsername() . "/web",
             'site_username' => $this->site->getUsername(),
+            'site_php' => $this->site->getPhp(),
             'site_db_password' => $this->site->getDatabasePassword(),
         ], $this->dynamicParameters);
 
